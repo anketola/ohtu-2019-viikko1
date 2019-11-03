@@ -133,7 +133,7 @@ public class VarastoTest {
     public void konstruktoriKahdellaParametrillaNegSaldoNolla() {
         Varasto uusiVarasto = new Varasto(10, -50);
         // saldon pitäisi olla nyt vain nolla
-        assertEquals(0, uusiVarasto.getSaldo(), vertailuTarkkuus);
+        assertEquals(100, uusiVarasto.getSaldo(), vertailuTarkkuus);
     }
     
    
