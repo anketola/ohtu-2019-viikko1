@@ -64,5 +64,77 @@ public class VarastoTest {
         // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
         assertEquals(4, varasto.paljonkoMahtuu(), vertailuTarkkuus);
     }
-
+    
+    @Test
+    public void toStringToimii() {
+        String merkkijono = varasto.toString();
+        assertEquals("saldo = 0.0, vielä tilaa 10.0", merkkijono);
+    }
+    
+    @Test
+    public void negatiivinenLisaaminenEiOnnistu() {
+        varasto.lisaaVarastoon(-100);
+        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void negatiivinenOttaminenEiOnnistu() {
+        varasto.otaVarastosta(-100);
+        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+   
+    @Test
+    public void varastoonLaitetaanLiikaaToimii() {
+        varasto.lisaaVarastoon(20);
+        // pitäisi olla saldoa tilavuuden verran 10, ylimäärä poistuu
+        assertEquals(10, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void varastostaOtetaanLiikaaToimii() {
+        varasto.lisaaVarastoon(10);
+        double saatu = varasto.otaVarastosta(20);
+        // pitäisi palauttaa vain saldon verran eli 10
+        assertEquals(10, saatu, vertailuTarkkuus);
+    }
+    
+    @Test
+    public void tyhjaVarastoEiTilavuutta() {
+        Varasto tyhjaVarasto = new Varasto(0.0);
+        assertEquals(0, tyhjaVarasto.getTilavuus(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void konstruktoriKahdellaParametrillaTilavuusOikein() {
+        Varasto uusiVarasto = new Varasto(50, 0);
+        assertEquals(50, uusiVarasto.getTilavuus(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void konstruktoriKahdellaParametrillaSaldoOikein() {
+        Varasto uusiVarasto = new Varasto(50, 10);
+        assertEquals(10, uusiVarasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void konstruktoriKahdellaParametrillaTyhjaVarasto() {
+        Varasto uusiVarasto = new Varasto(0, 0);
+        assertEquals(0, uusiVarasto.getTilavuus(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void konstruktoriKahdellaParametrillaSaldoYliTilavuus() {
+        Varasto uusiVarasto = new Varasto(10, 20);
+        // saldon pitäisi olla vain asetetun tilavuuden verran
+        assertEquals(10, uusiVarasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void konstruktoriKahdellaParametrillaNegSaldoNolla() {
+        Varasto uusiVarasto = new Varasto(10, -50);
+        // saldon pitäisi olla nyt vain nolla
+        assertEquals(0, uusiVarasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+   
 }
