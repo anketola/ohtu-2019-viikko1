@@ -136,5 +136,7 @@ public class VarastoTest {
         assertEquals(0, uusiVarasto.getSaldo(), vertailuTarkkuus);
     }
     
+    //muutos
+    
    
 }
