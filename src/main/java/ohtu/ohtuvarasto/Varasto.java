@@ -59,6 +59,11 @@ public class Varasto {
         } else {
             saldo = tilavuus;  // täyteen ja ylimäärä hukkaan!
         }
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                
+            }
+        }
     }
 
     public double otaVarastosta(double maara) {
